@@ -1,11 +1,11 @@
 <template>
     <div>
         <md-button class="md-icon-button" @click="showDialog = true">
-            <md-icon>add_circle</md-icon>
+            <md-icon>edit</md-icon>
         </md-button>
 
         <md-dialog :md-active.sync="showDialog" class="container-fluid">
-            <md-dialog-title>Create a pet</md-dialog-title>
+            <md-dialog-title>Edit a pet</md-dialog-title>
 
             <form novalidate class="md-layout">
                 <div class="container-fluid">
@@ -75,19 +75,14 @@
     import Multiselect from 'vue-multiselect';
 
     export default {
-        name: 'CreatePet',
+        name: 'EditPet',
         mixins: [validationMixin],
         components: { Multiselect },
+        props: ['pet'],
         data: () => ({
             showDialog: false,
             sending: false,
             edit: false,
-            pet: {
-                category: null,
-                address: null,
-                name: null,
-                image: null,
-            },
             categories: [],
             addresses: [],
         }),
@@ -166,37 +161,61 @@
             close() {
                 this.$v.$reset();
 
+                this.pet.id = null;
                 this.pet.address = null;
                 this.pet.category = null;
                 this.pet.name = null;
                 this.pet.image = null;
 
                 this.showDialog = false;
-
-                console.log(this.$parent.$parent);
-
-                this.$parent.$parent.getPets();
             },
             save() {
                 this.sending = true;
 
-                const pet = {
-                    ...this.pet,
-                    address: this.pet.address.id
-                };
+                if (this.edit) {
 
-                axios.post('pets', pet).then((response) => {
-                    this.close();
-                }).catch((error) => {
-                    console.log(error);
+                    const pet = {
+                        ...this.pet,
+                        category: this.pet.category.id
+                    };
 
-                    if (error.response && error.response.status === 401) {
-                        this.$store.commit('logout');
-                    }
+                    axios.put('pets' + this.pet.id, pet).then((response) => {
+                        console.log(response);
 
-                }).finally(() => {
-                    this.sending = false;
-                });
+                        this.close();
+                    }).catch((error) => {
+
+                        console.log(error.response.status);
+
+                        if (error.response.status === 401) {
+                            this.$store.commit('logout');
+                        }
+
+                    }).finally(() => {
+                        this.sending = false;
+                    });
+                } else {
+
+                    const pet = {
+                        ...this.pet,
+                        address: this.pet.address.id
+                    };
+
+                    axios.post('pets', pet).then((response) => {
+                        console.log(response);
+
+                        this.close();
+                    }).catch((error) => {
+                        console.log(error.response.status);
+
+                        if (error.response.status === 401) {
+                            this.$store.commit('logout');
+                        }
+
+                    }).finally(() => {
+                        this.sending = false;
+                    });
+                }
             }
         }
     }

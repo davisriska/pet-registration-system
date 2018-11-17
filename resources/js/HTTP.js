@@ -10,7 +10,7 @@ const instance = axios.create({
 instance.interceptors.request.use(config => {
     nprogress.start();
 
-    const token = localStorage.getItem('token');
+    const token = JSON.parse(localStorage.getItem('pet-registration-system')).token;
     if (token) {
         config.headers.Authorization = 'Bearer ' + token.access_token;
     }

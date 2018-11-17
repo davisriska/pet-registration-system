@@ -1,10 +1,10 @@
 <?php
 
-namespace App;
+    namespace App;
 
-use Illuminate\Database\Eloquent\Model;
+    use Illuminate\Database\Eloquent\Model;
 
-/**
+    /**
  * App\Category
  *
  * @property int $id
@@ -17,7 +17,8 @@ use Illuminate\Database\Eloquent\Model;
  * @method static \Illuminate\Database\Eloquent\Builder|\App\Category whereValue($value)
  * @mixin \Eloquent
  */
-class Category extends Model
-{
-    //
-}
+    class Category extends Model {
+
+
+
+    }

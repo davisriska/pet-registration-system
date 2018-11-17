@@ -133,3 +133,54 @@ select:-webkit-autofill:focus {
   }
 }
 
+@import "~vue-multiselect/dist/vue-multiselect.min.css";
+
+.multiselect__tags {
+  background: #424242;
+  border: none;
+  border-bottom: 1px solid #e8e8e8;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.multiselect__input, .multiselect__single {
+  background: #424242;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgba(255, 255, 255, 0.7);
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: rgba(255, 255, 255, 0.7);
+}
+
+::-ms-input-placeholder { /* Microsoft Edge */
+  color: rgba(255, 255, 255, 0.7);
+}
+
+:focus::-webkit-input-placeholder {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+:-moz-placeholder:focus {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+:-ms-input-placeholder:focus {
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.multiselect__content-wrapper {
+  background: #424242;
+  color: rgba(255, 255, 255, 0.7);
+}
+
+.multiselect__option--selected.multiselect__option--highlight {
+  border-bottom: 1px solid #424242;
+}
+
+.md-white {
+  color: rgba(255, 255, 255, 0.7) !important;
+  background-color: rgba(96, 96, 96, 0.7) !important;
+}

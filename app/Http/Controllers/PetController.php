@@ -2,10 +2,22 @@
 
     namespace App\Http\Controllers;
 
+    use App\Address;
+    use App\Category;
+    use App\Http\Requests\Pets\Store;
     use App\Pet;
+    use Auth;
     use Illuminate\Http\Request;
+    use Illuminate\Support\Facades\Storage;
+    use Illuminate\Support\Str;
+    use Intervention\Image\Facades\Image;
 
     class PetController extends Controller {
+
+        public function __construct() {
+            $this->middleware('auth:api');
+        }
+
         /**
          * Display a listing of the resource.
          *
@@ -13,37 +25,42 @@
          */
         public function index() {
 
-            return Pet::all();
+            return Pet::where('user_id', Auth::id())->get();
         }
 
         /**
          * Store a newly created resource in storage.
          *
-         * @param  \Illuminate\Http\Request $request
-         * @return \Illuminate\Http\Response
+         * @param Store $request
+         * @return array
          */
-        public function store(Request $request) {
-            //
-        }
+        public function store(Store $request) {
 
-        /**
-         * Display the specified resource.
-         *
-         * @param  \App\Pet $pet
-         * @return \Illuminate\Http\Response
-         */
-        public function show(Pet $pet) {
-            //
-        }
+            $data = $request->validated();
 
-        /**
-         * Show the form for editing the specified resource.
-         *
-         * @param  \App\Pet $pet
-         * @return \Illuminate\Http\Response
-         */
-        public function edit(Pet $pet) {
-            //
+            if (!isset($data['image']) || filter_var($data['image'], FILTER_VALIDATE_URL)) {
+                abort(422);
+            }
+
+            $address = Address::find($data['address']);
+            if (!$address) {
+                $address = Address::create(['value' => $data['address']]);
+            }
+
+            $category = Category::findOrFail($data['category']);
+
+            $image = Image::make($data['image']);
+            $image_path = Str::random(40) . '.' . explode('/', $image->mime())[1];
+            $image->save(Storage::disk('local')->path($image_path));
+
+            $pet = Pet::create([
+                                   'address_id'  => $address->id,
+                                   'category_id' => $category->id,
+                                   'name'        => $data['name'],
+                                   'image_path'  => $image_path
+                               ]);
+
+            return ['success' => true];
         }
 
         /**

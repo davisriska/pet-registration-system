@@ -18,5 +18,7 @@
  * @mixin \Eloquent
  */
     class Address extends Model {
-        //
+
+        protected $fillable = ['value'];
+
     }

@@ -13,13 +13,16 @@
     |
     */
 
+    Route::post('login', 'AuthController@login')->name('login');
+    Route::post('register', 'AuthController@register');
+    Route::post('logout', 'AuthController@logout');
+    Route::post('refresh', 'AuthController@refresh');
+    Route::post('me', 'AuthController@me');
 
-    Route::group(['middleware' => 'api'], function ($router) {
+    Route::get('categories', 'CategoryController@index');
+    Route::get('addresses', 'AddressController@index');
+    Route::resource('pets', 'PetController');
 
-        Route::post('login', 'AuthController@login');
-        Route::post('register', 'AuthController@register');
-        Route::post('logout', 'AuthController@logout');
-        Route::post('refresh', 'AuthController@refresh');
-        Route::post('me', 'AuthController@me');
 
-    });
+
+

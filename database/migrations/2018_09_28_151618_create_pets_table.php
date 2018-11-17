@@ -20,6 +20,8 @@
                 $t->integer('category_id')->unsigned();
                 $t->integer('address_id')->unsigned();
 
+                $t->text('image_path');
+
                 $t->timestamps();
             });
         }
