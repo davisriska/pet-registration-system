@@ -11,12 +11,13 @@
          * @return void
          */
         public function up() {
-            Schema::create('users', function (Blueprint $table) {
-                $table->increments('id');
-                $table->string('email')->unique();
-                $table->string('password');
-                $table->rememberToken();
-                $table->timestamps();
+            Schema::create('users', function (Blueprint $t) {
+                $t->increments('id');
+                $t->string('email')->unique();
+                $t->string('password');
+                $t->rememberToken();
+                $t->timestamps();
+                $t->softDeletes();
             });
         }
 

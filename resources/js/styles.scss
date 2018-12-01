@@ -1,0 +1,30 @@
+// Colors
+$blue: #3490dc;
+$indigo: #6574cd;
+$purple: #9561e2;
+$pink: #f66D9b;
+$red: #e3342f;
+$orange: #f6993f;
+$yellow: #ffed4a;
+$green: #38c172;
+$teal: #4dc0b5;
+$cyan: #6cb2eb;
+
+// Body
+$body-bg: #424242;
+$modal-content-bg: #424242;
+
+$jumbotron-bg: #6b6b6b;
+
+@import "~bootstrap/scss/bootstrap";
+
+$fa-font-path: "/dist/assets/webfonts/";
+@import "~@fortawesome/fontawesome-free/scss/fontawesome";
+@import "~@fortawesome/fontawesome-free/scss/solid";
+@import "~@fortawesome/fontawesome-free/scss/brands";
+
+.clickable {
+  cursor: pointer;
+}
+
+@import "~@ng-select/ng-select/themes/default.theme.css";

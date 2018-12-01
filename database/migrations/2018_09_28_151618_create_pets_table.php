@@ -23,6 +23,7 @@
                 $t->text('image_path');
 
                 $t->timestamps();
+                $t->softDeletes();
             });
         }
 

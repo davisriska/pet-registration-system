@@ -17,6 +17,7 @@
                 $t->string('value');
 
                 $t->timestamps();
+                $t->softDeletes();
             });
         }
 

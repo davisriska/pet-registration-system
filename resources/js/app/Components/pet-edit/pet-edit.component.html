@@ -1,0 +1,64 @@
+<form [formGroup]="petForm" (ngSubmit)="save()" novalidate>
+
+    <div class="modal-header bg-dark text-light">
+        <h4 class="modal-title pull-left">Create a pet</h4>
+        <button type="button" class="close pull-right text-light" aria-label="Close" (click)="bsModalRef.hide()">
+            <i class="fas fa-times"></i>
+        </button>
+    </div>
+    <div class="modal-body text-light">
+
+        <div class="form-group">
+            <label>Category</label>
+
+            <ng-select [items]="categories" bindLabel="value" bindValue="id" formControlName="category"
+                       [ngClass]="{ 'is-invalid': submitted && f.category.errors }"
+                       placeholder="Select an category"
+            >
+            </ng-select>
+
+            <div *ngIf="submitted && f.category.errors" class="invalid-feedback" [ngStyle]="{'display': submitted && f.category.errors ? 'block' : 'none'}">
+                <div *ngIf="f.category.errors.required">Category is required</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Address</label>
+
+            <ng-select [items]="addresses" bindLabel="value" bindValue="id" formControlName="address"
+                       [ngClass]="{ 'is-invalid': submitted && f.address.errors }"
+                       [addTag]="true"
+                       placeholder="Select an address or create a new address"
+            >
+            </ng-select>
+
+            <div *ngIf="submitted && f.address.errors" class="invalid-feedback" [ngStyle]="{'display': submitted && f.address.errors ? 'block' : 'none'}">
+                <div *ngIf="f.address.errors.required">Address is required</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Name</label>
+            <input type="text" formControlName="name" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.name.errors }"/>
+            <div *ngIf="submitted && f.name.errors" class="invalid-feedback">
+                <div *ngIf="f.name.errors.required">Name is required</div>
+            </div>
+        </div>
+
+        <div class="form-group">
+            <label>Select pets image</label>
+            <input (change)="readImage($event)" type="file" class="form-control-file" formControlName="image" [ngClass]="{ 'is-invalid': submitted && f.image.errors }">
+            <div *ngIf="submitted && f.image.errors" class="invalid-feedback">
+                <div *ngIf="f.image.errors.required">Image is required</div>
+            </div>
+        </div>
+
+        <img *ngIf="pet.image" [src]="pet.image" class="img-fluid w-100" alt="Responsive image">
+
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-default" (click)="close()">Close</button>
+        <button type="submit" class="btn btn-default">{{ pet.id ? 'Update' : 'Create'}}</button>
+    </div>
+
+</form>

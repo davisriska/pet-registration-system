@@ -1,0 +1,20 @@
+<div class="column">
+    <div class="post-module">
+        <div class="thumbnail">
+            <img [src]="pet.image"/>
+        </div>
+        <div class="post-content">
+            <div class="category">{{ pet.category.value }}</div>
+            <h1 class="title">{{ pet.name }}</h1>
+            <h2 class="sub_title">{{ pet.address.value }}</h2>
+            <div class="post-meta">
+                <span class="clickable" (click)="edit()">
+                    <i class="fas fa-lg fa-edit"></i>
+                </span>
+                <span class="float-right clickable" (click)="delete()">
+                    <i class="fas fa-lg fa-trash"></i>
+                </span>
+            </div>
+        </div>
+    </div>
+</div>

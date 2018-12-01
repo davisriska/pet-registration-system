@@ -2,25 +2,20 @@
 <html lang="{{ app()->getLocale() }}">
     <head>
         <meta charset="utf-8">
-        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <title>Pet registration system</title>
+        <base href="/">
+
         <meta name="viewport" content="width=device-width, initial-scale=1">
-
-        <title>{{ env('APP_NAME', 'Pet registration system') }}</title>
-
-        <meta name="csrf-token" content="{{ csrf_token() }}">
-
-        <!-- Fonts -->
-        <link rel="stylesheet" href="//fonts.googleapis.com/css?family=Roboto:400,500,700,400italic|Material+Icons">
-
-        <link rel="stylesheet" href="{{ asset('css/app.css') }}">
-
+        <link rel="icon" type="image/x-icon" href="{{ asset('dist/favicon.ico') }}">
+        <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
     </head>
     <body>
-
-        <div id="loader"></div>
-        <div id="app"></div>
-
-        <script src="{{ asset('js/app.js') }}"></script>
-
+        <app-root></app-root>
+        <script type="text/javascript" src="{{ asset('dist/runtime.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('dist/polyfills.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('dist/styles.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('dist/vendor.js') }}"></script>
+        <script type="text/javascript" src="{{ asset('dist/main.js') }}"></script>
     </body>
 </html>
+
