@@ -30,7 +30,7 @@ export class JwtInterceptor implements HttpInterceptor {
 
                 console.log(error);
 
-                if (error.status === 404) {
+                if (error.status === 401) {
                     this.authService.logout();
                     this.modalService.hide(1);
                 }
