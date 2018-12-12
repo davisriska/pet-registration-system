@@ -2,7 +2,7 @@ import {Component, OnDestroy, OnInit} from '@angular/core';
 import {BsModalRef} from "ngx-bootstrap";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {CategoryService} from "../../Services/category.service";
-import {Observable, Subject, Subscription} from "rxjs";
+import {Observable, Subject} from "rxjs";
 import {takeUntil} from "rxjs/operators";
 import {AddressService} from "../../Services/address.service";
 import {PetService} from "../../Services/pet.service";
@@ -66,6 +66,8 @@ export class PetEditComponent implements OnInit, OnDestroy {
                 image: [null, Validators.required]
             });
         }
+
+        this.addressService.loadAddresses();
 
     }
 
@@ -138,6 +140,10 @@ export class PetEditComponent implements OnInit, OnDestroy {
             }
         });
 
+    }
+
+    addTag(name) {
+        return {value: name, id: name};
     }
 
     close() {

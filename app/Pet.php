@@ -4,6 +4,7 @@
 
     use App\Observers\CreatorObserver;
     use Illuminate\Database\Eloquent\Model;
+    use Illuminate\Database\Eloquent\SoftDeletes;
     use Illuminate\Support\Facades\Storage;
 
     /**
@@ -28,6 +29,8 @@
      * @method static \Illuminate\Database\Eloquent\Builder|\App\Pet whereImagePath($value)
      */
     class Pet extends Model {
+
+        use SoftDeletes;
 
         protected $with     = ['category', 'address'];
         protected $fillable = ['name', 'user_id', 'category_id', 'address_id', 'image_path'];
