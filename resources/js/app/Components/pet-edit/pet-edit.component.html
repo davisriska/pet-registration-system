@@ -1,7 +1,7 @@
 <form [formGroup]="petForm" (ngSubmit)="save()" novalidate>
 
     <div class="modal-header bg-dark text-light">
-        <h4 class="modal-title pull-left">Create a pet</h4>
+        <h4 class="modal-title pull-left">{{ pet.id ? 'Edit' : 'Create' }} a pet</h4>
         <button type="button" class="close pull-right text-light" aria-label="Close" (click)="bsModalRef.hide()">
             <i class="fas fa-times"></i>
         </button>
@@ -27,7 +27,7 @@
 
             <ng-select [items]="addresses" bindLabel="value" bindValue="id" formControlName="address"
                        [ngClass]="{ 'is-invalid': submitted && f.address.errors }"
-                       [addTag]="true"
+                       [addTag]="addTag"
                        placeholder="Select an address or create a new address"
             >
             </ng-select>
